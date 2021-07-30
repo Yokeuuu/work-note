@@ -1,0 +1,122 @@
+server:
+  port: 9100
+
+# 数据源
+spring:
+#  datasource:
+#    druid:
+#      url: jdbc:mysql://192.168.10.46:12307/db_sports_club?useUnicode=true&characterEncoding=UTF8
+#      username: root
+#      password: root
+#      driver-class-name: com.mysql.jdbc.Driver
+#      initial-size: 1
+#      max-active: 20
+#      min-idle: 1
+#      max-wait: 60000
+#      pool-prepared-statements: false
+#      max-pool-prepared-statement-per-connection-size: 20
+#      validation-query: SELECT 'x'
+#      test-on-borrow: false
+#      test-on-return: false
+#      test-while-idle: true
+#      time-between-eviction-runs-millis: 60000
+#      min-evictable-idle-time-millis: 300000
+#      filters: stat
+#      web-stat-filter:
+#        enabled: true
+#        url-pattern: /*
+#        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+#        session-stat-enable: false
+#        session-stat-max-count: 1000
+#        principal-session-name: admin
+#        principal-cookie-name: admin
+#        profile-enable: true
+#      stat-view-servlet:
+#        enabled: true
+#        url-pattern: /druid/*
+#        reset-enable: true
+#        login-username: admin
+#        login-password: admin
+#        allow:
+#        deny:
+#      aop-patterns: com.sports.data.service.*
+  redis:
+    password:
+    host: 192.168.10.46
+    port: 12201
+    timeout: 50000
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false
+  #文件上传
+  servlet:
+    multipart:
+      # 是否支持批量上传   (默认值 true)
+      enabled: true
+      # 文件大小阈值，当大于这个阈值时将写入到磁盘，否则存在内存中，（默认值0 一般情况下不用特意修改）
+      file-size-threshold: 0
+      # 上传文件的临时目录 （一般情况下不用特意修改）
+      location: ''
+      # 上传文件最大为 1M （默认值 1M 根据自身业务自行控制即可）
+      max-file-size: -1
+      # 上传请求最大为 10M（默认值10M 根据自身业务自行控制即可）
+      max-request-size: -1
+      # 判断是否要延迟解析文件（相当于懒加载，一般情况下不用特意修改）
+      resolve-lazily: false
+  mail:
+    port: 465
+    protocol: smtps
+    host: 220.181.12.18
+    username: rayeyeweix1@163.com
+    password: XLHHCKFAQYYHMLYL
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+swagger:
+  enable: true
+
+#mybatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.sports.club.domain.bo
+  configuration:
+    map-underscore-to-camel-case: true
+
+#通用mapper配置
+mapper:
+  mappers: tk.mybatis.mapper.common.Mapper
+  identity: MYSQL
+
+pagehelper:
+  helperDialect: mysql  #分页插件方言选择
+  reasonable: true   #合理化参数，设为true时pageNum<=0 时会查第一页， pageNum>pages（超过总数时），会查询最后一页
+  supportMethodsArguments: true
+  params: count=countsql
+  #pageSizeZero：默认值为 false，当该参数设置为 true 时，如果 pageSize=0 或者 RowBounds.limit = 0 就会查询出全部的结果（相当于没有执行分页查询，但是返回结果仍然是 Page 类型）。
+  pageSizeZero: true
+
+#文件上传路径
+file:
+  url: D:\file\
+  excel: excel/
+  qrCode: qrCode/
+
+
+#微信配置
+wxConfig:
+  appid: wxff6682d2f73161bb
+  secret: 3c18fce9364c475a27868dcf58f120d5
+
