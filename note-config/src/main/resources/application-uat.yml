@@ -1,0 +1,60 @@
+#当前服务ip
+hostip: 127.0.0.1
+server:
+  port: 9902
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          # 仓库地址
+          uri: https://github.com/intomylife/SpringCloud
+          # 对应 {label} 部分，即 Git 的分支
+          label: master
+          # 仓库文件夹名称，多个以逗号分隔
+          search-paths: springcloud-config-eureka/config-repo
+          # git 仓库用户名（公开库可以不用填写）
+          username:
+          # git 仓库密码（公开库可以不用填写）
+          password:
+
+eureka:
+  instance:
+    # 使用 ip 代替实例名
+    prefer-ip-address: true
+    ip-address: ${hostip}
+    # 实例的 ID 规则
+    instance-id: ${hostip}:${server.port}
+    # 实例的主机名
+    hostname: 192.168.10.46
+    # 心跳时间，即服务续约间隔时间（缺省为30s）
+    lease-renewal-interval-in-seconds: 5
+    # 发呆时间，即服务续约到期时间（缺省为90s）
+    lease-expiration-duration-in-seconds: 10
+  client:
+    serviceUrl:
+      # 注册中心地址
+      defaultZone: http://${eureka.instance.hostname}:9901/eureka/
+      #eureka client配置5s从server同步一次服务列表(缺省为30s)
+      registry-fetch-interval-seconds: 5
+
+#开启feign支持hystrix  (注意，一定要开启，旧版本默认支持，新版本默认关闭)
+#feign:
+#  hystrix:
+#    enabled: true
+#  client:
+#    config:
+#      default:
+#        connectTimeout: 60000
+#        readTimeout: 60000
+#修改调用超时时间（默认是1秒就算超时）
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        timeout:
+#          enabled: true
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 60000

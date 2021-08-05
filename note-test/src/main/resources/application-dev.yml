@@ -1,45 +1,47 @@
+hostip: 192.168.10.112
+
 server:
-  port: 9100
+  port: 9903
 
 # 数据源
 spring:
-#  datasource:
-#    druid:
-#      url: jdbc:mysql://192.168.10.46:12307/db_sports_club?useUnicode=true&characterEncoding=UTF8
-#      username: root
-#      password: root
-#      driver-class-name: com.mysql.jdbc.Driver
-#      initial-size: 1
-#      max-active: 20
-#      min-idle: 1
-#      max-wait: 60000
-#      pool-prepared-statements: false
-#      max-pool-prepared-statement-per-connection-size: 20
-#      validation-query: SELECT 'x'
-#      test-on-borrow: false
-#      test-on-return: false
-#      test-while-idle: true
-#      time-between-eviction-runs-millis: 60000
-#      min-evictable-idle-time-millis: 300000
-#      filters: stat
-#      web-stat-filter:
-#        enabled: true
-#        url-pattern: /*
-#        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
-#        session-stat-enable: false
-#        session-stat-max-count: 1000
-#        principal-session-name: admin
-#        principal-cookie-name: admin
-#        profile-enable: true
-#      stat-view-servlet:
-#        enabled: true
-#        url-pattern: /druid/*
-#        reset-enable: true
-#        login-username: admin
-#        login-password: admin
-#        allow:
-#        deny:
-#      aop-patterns: com.sports.data.service.*
+  #  datasource:
+  #    druid:
+  #      url: jdbc:mysql://192.168.10.46:12307/db_sports_club?useUnicode=true&characterEncoding=UTF8
+  #      username: root
+  #      password: root
+  #      driver-class-name: com.mysql.jdbc.Driver
+  #      initial-size: 1
+  #      max-active: 20
+  #      min-idle: 1
+  #      max-wait: 60000
+  #      pool-prepared-statements: false
+  #      max-pool-prepared-statement-per-connection-size: 20
+  #      validation-query: SELECT 'x'
+  #      test-on-borrow: false
+  #      test-on-return: false
+  #      test-while-idle: true
+  #      time-between-eviction-runs-millis: 60000
+  #      min-evictable-idle-time-millis: 300000
+  #      filters: stat
+  #      web-stat-filter:
+  #        enabled: true
+  #        url-pattern: /*
+  #        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+  #        session-stat-enable: false
+  #        session-stat-max-count: 1000
+  #        principal-session-name: admin
+  #        principal-cookie-name: admin
+  #        profile-enable: true
+  #      stat-view-servlet:
+  #        enabled: true
+  #        url-pattern: /druid/*
+  #        reset-enable: true
+  #        login-username: admin
+  #        login-password: admin
+  #        allow:
+  #        deny:
+  #      aop-patterns: com.sports.data.service.*
   redis:
     password:
     host: 192.168.10.46

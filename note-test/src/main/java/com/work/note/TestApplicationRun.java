@@ -2,6 +2,7 @@ package com.work.note;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @ClassName TestApplication
@@ -10,9 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Date 2021/7/27 17:51
  * @Version 1.0
  **/
+@EnableDiscoveryClient
 @SpringBootApplication
-public class TestApplication {
+public class TestApplicationRun {
     public static void main(String[] args) {
-        SpringApplication.run(TestApplication.class,args);
+        SpringApplication.run(TestApplicationRun.class,args);
     }
 }

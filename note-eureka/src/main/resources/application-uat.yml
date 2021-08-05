@@ -1,0 +1,32 @@
+#当前服务ip
+hostip: 127.0.0.1
+server:
+  port: 9901
+
+#spring:
+#  rabbitmq:
+#    host: 192.168.10.56
+#    port: 5672
+#    username: user
+#    password: 123456
+
+eureka:
+  instance:
+    preferIpAddress: true
+    ip-address: ${hostip}
+    instance-id: ${hostip}:${server.port}
+    hostname: 127.0.0.1
+  client:
+    #注册自己，为true时 需要service-url false表示不向注册中心注册自己。
+    registerWithEureka: false
+    #false表示自己端就是注册中心，我的职责就是维护服务实例，并不需要去检索服务
+    fetchRegistry: false
+    serviceUrl:
+      # 如果服务注册中心为高可用集群时，多个注册中心地址以逗号分隔。
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    enableSelfPreservation: false
+    # 默认60s. 启用主动失效，并且每次主动失效检测间隔为2s.
+    eviction-interval-timer-in-ms: 2000
+    #不读取只读的缓存服务清单，因为30秒刷新一次比较慢，读写高速缓存过期策略
+    useReadOnlyResponseCache: false
