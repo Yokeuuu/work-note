@@ -20,9 +20,7 @@ public class RedisLock {
     private static final Long RELEASE_SUCCESS = 1L;
     private static final String LOCK_SUCCESS = "OK";
     private static final String SET_IF_NOT_EXIST = "NX";
-    // 当前设置 过期时间单位, EX = seconds; PX = milliseconds
     private static final String SET_WITH_EXPIRE_TIME = "EX";
-    // if get(key) == value return del(key)
     private static final String RELEASE_LOCK_SCRIPT = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
 
     @Autowired
@@ -40,14 +38,14 @@ public class RedisLock {
      * @return
      */
     public boolean tryLock(String lockKey, String clientId, long seconds) {
-        return redisTemplate.execute((RedisCallback<Boolean>) redisConnection -> {
+        return Boolean.TRUE.equals(redisTemplate.execute((RedisCallback<Boolean>) redisConnection -> {
             Jedis jedis = (Jedis) redisConnection.getNativeConnection();
             String result = jedis.set(lockKey, clientId, SET_IF_NOT_EXIST, SET_WITH_EXPIRE_TIME, seconds);
             if (LOCK_SUCCESS.equals(result)) {
                 return true;
             }
             return false;
-        });
+        }));
     }
 
     /**
@@ -58,7 +56,7 @@ public class RedisLock {
      * @return
      */
     public boolean releaseLock(String lockKey, String clientId) {
-        return redisTemplate.execute((RedisCallback<Boolean>) redisConnection -> {
+        return Boolean.TRUE.equals(redisTemplate.execute((RedisCallback<Boolean>) redisConnection -> {
             Jedis jedis = (Jedis) redisConnection.getNativeConnection();
             Object result = jedis.eval(RELEASE_LOCK_SCRIPT, Collections.singletonList(lockKey),
                     Collections.singletonList(clientId));
@@ -66,6 +64,6 @@ public class RedisLock {
                 return true;
             }
             return false;
-        });
+        }));
     }
 }
